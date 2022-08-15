@@ -1,5 +1,7 @@
 # vue-composition-api-noteballs
 
+## I have created this app following a course on Udemy by Danny Connell [@danny__connell](https://twitter.com/danny__connell) on twitter.
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup

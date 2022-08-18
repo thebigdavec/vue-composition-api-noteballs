@@ -49,16 +49,22 @@ export const useNotesStore = defineStore('notes', {
     },
     fetch() {
       if (unSubscribe) unSubscribe()
-      unSubscribe = onSnapshot(q, querySnapshot => {
-        this.notes = []
-        querySnapshot.forEach(note =>
-          this.notes.push({
-            ...note.data(),
-            id: note.id
-          })
-        )
-        this.isLoading = false
-      })
+      unSubscribe = onSnapshot(
+        q,
+        querySnapshot => {
+          this.notes = []
+          querySnapshot.forEach(note =>
+            this.notes.push({
+              ...note.data(),
+              id: note.id
+            })
+          )
+          this.isLoading = false
+        },
+        error => {
+          console.error(error.message)
+        }
+      )
     },
     clear() {
       this.notes = []

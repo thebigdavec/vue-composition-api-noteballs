@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { defineStore } from 'pinia'
-import { reactive, onMounted } from 'vue'
+import { reactive, watch } from 'vue'
 import { auth } from '@/js/firebase'
 import {
   createUserWithEmailAndPassword,
@@ -17,8 +17,11 @@ export const useAuthStore = defineStore('auth', () => {
     isLoggedIn: false
   })
 
+  // watch(user, user => {
+  //   console.log(user)
+  // })
+
   async function registerUser(credentials) {
-    console.log('Attempting registration...')
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -27,7 +30,6 @@ export const useAuthStore = defineStore('auth', () => {
       )
       user.uid = userCredential.user.uid
       user.current = userCredential.user
-      console.log('User successfully registered!', { user: user.current })
     } catch (error) {
       console.error('Registration failed.', error.message)
     }
@@ -51,7 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
     await signOut(auth)
   }
 
-  onMounted(() => {
+  function init() {
     onAuthStateChanged(auth, theUser => {
       const notesStore = useNotesStore()
       if (theUser) {
@@ -66,7 +68,7 @@ export const useAuthStore = defineStore('auth', () => {
         notesStore.clear()
       }
     })
-  })
+  }
 
-  return { user, registerUser, login, logout }
+  return { user, registerUser, login, logout, init }
 })

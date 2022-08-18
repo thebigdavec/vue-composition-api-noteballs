@@ -13,7 +13,7 @@ const notesStore = useNotesStore()
 const { notes } = storeToRefs(notesStore)
 
 const newNote = ref('')
-const noteForm = ref(null)
+const noteForm = ref()
 
 const addNote = async () => {
   if (!newNote.value) return

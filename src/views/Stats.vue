@@ -1,13 +1,7 @@
 <script setup>
-import { ref } from 'vue'
 import { useNotesStore } from '../stores/notesStore'
-import { vAutofocus } from '@/directives/vAutofocus'
-import { useWatchCharacters } from '../use/useWatchCharacters'
 
 const notesStore = useNotesStore()
-const inputRef = ref('')
-const maxlength = 10
-useWatchCharacters(inputRef, { maxlength })
 </script>
 
 <template>
@@ -26,13 +20,6 @@ useWatchCharacters(inputRef, { maxlength })
       <p>{{ notesStore.totalCharacterCount }}</p>
     </div>
   </div>
-  <input
-    v-model="inputRef"
-    type="text"
-    placeholder="Do you love noteballs?"
-    v-autofocus
-    :maxlength="maxlength"
-  />
 </template>
 
 <style scoped>

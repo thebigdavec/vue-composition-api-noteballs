@@ -1,4 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
+// @ts-nocheck
+import { createRouter, createWebHashHistory } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore'
 
 // @ts-ignore
 import Notes from '@/views/Notes.vue'
@@ -33,8 +35,18 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach(async (to, from) => {
+  const authStore = useAuthStore()
+  if (!authStore.user.isLoggedIn && to.name !== 'auth') {
+    return { name: 'auth' }
+  }
+  if (authStore.user.isLoggedIn && to.name === 'auth') {
+    return false
+  }
 })
 
 export default router

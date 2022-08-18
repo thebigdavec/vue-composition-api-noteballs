@@ -1,9 +1,15 @@
-<script setup></script>
+<script setup>
+const logout = () => {
+  console.log('Log out')
+}
+</script>
 
 <template>
   <nav role="navigation" aria-label="main navigation">
     <RouterLink :to="{ name: 'notes' }">Notes</RouterLink>
     <RouterLink :to="{ name: 'stats' }">Stats</RouterLink>
+    <RouterLink :to="{ name: 'auth' }">Login</RouterLink>
+    <button @click="logout" class="link-btn">Logout</button>
   </nav>
 </template>
 
@@ -15,6 +21,7 @@ nav {
 }
 nav a {
   color: var(--blue-3);
+  text-shadow: 2px 2px 0 black;
   transition: color 0.5s ease-out;
 }
 nav a:hover,
@@ -27,5 +34,9 @@ nav .router-link-active {
 }
 nav .router-link-exact-active {
   color: var(--gray-2);
+}
+button {
+  text-shadow: 2px 2px 0 black;
+  color: var(--blue-3);
 }
 </style>

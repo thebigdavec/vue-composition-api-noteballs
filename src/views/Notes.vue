@@ -30,7 +30,12 @@ onMounted(() => {
 </script>
 <template>
   <h1>Notes</h1>
-  <NoteForm v-model="newNote" ref="noteForm" placeholder="Add a new note">
+  <NoteForm
+    v-model="newNote"
+    ref="noteForm"
+    class="card container-inner"
+    placeholder="Add a new note"
+  >
     Add Note
     <template #buttons>
       <button @click="addNote" :disabled="!newNote" type="submit">
@@ -39,7 +44,7 @@ onMounted(() => {
     </template>
   </NoteForm>
   <progress v-if="notesStore.isLoading" />
-  <div v-else class="notes">
+  <div v-else class="notes container-inner">
     <div class="card" v-if="!notes.length">
       <h2>There are no notes.</h2>
       <p>Please add a new note in the area above.</p>
@@ -53,6 +58,7 @@ onMounted(() => {
 form {
   margin-block-end: var(--size-6);
 }
+
 .notes-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--size-fluid-9), 1fr));

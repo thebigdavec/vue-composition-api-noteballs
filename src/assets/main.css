@@ -34,8 +34,19 @@ h6 {
     padding: var(--size-6) var(--size-fluid-6);
 }
 
-.card,
-form {
+.container-inner {
+    max-width: 1560px;
+    margin-inline: auto;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.card {
     background: var(--surface-3);
     padding: var(--size-5) var(--size-7);
     border-radius: var(--size-3);
@@ -45,10 +56,6 @@ form {
 form {
     display: grid;
     gap: var(--size-4);
-}
-
-form:focus-within {
-    background: var(--gradient-23);
 }
 
 .form-actions,
@@ -72,4 +79,45 @@ button {
 
 .danger {
     background-color: var(--red-8);
+}
+
+.card {
+    display: grid;
+    gap: var(--size-5);
+}
+
+.card-content {
+    display: grid;
+    gap: var(--size-4);
+}
+
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--size-4);
+}
+
+.flex-between {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-2);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-end {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-2);
+    justify-content: flex-end;
+    align-items: center;
+}
+
+:empty {
+    display: none;
+}
+
+.card small {
+    max-inline-size: 100%;
 }

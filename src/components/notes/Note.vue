@@ -60,31 +60,4 @@ const modals = reactive({
   </div>
 </template>
 
-<style scoped>
-.card {
-  display: grid;
-  gap: var(--size-5);
-}
-.card-content {
-  display: grid;
-  gap: var(--size-4);
-}
-.card-content-note {
-  justify-self: right;
-  color: var(--gray-5);
-}
-.card-actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: var(--size-4);
-}
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-small {
-  max-inline-size: 100%;
-}
-</style>
+<style scoped></style>

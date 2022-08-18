@@ -57,4 +57,8 @@ const modals = reactive({
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+div:first-of-type {
+  grid-column: 1 / -1;
+}
+</style>

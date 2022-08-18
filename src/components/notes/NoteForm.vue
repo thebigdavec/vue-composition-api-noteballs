@@ -25,8 +25,8 @@ const emit = defineEmits(['update:modelValue'])
     <h2><slot /></h2>
     <textarea
       ref="textarea"
-      v-model="modelValue"
-      @input="emit('update:modelValue', modelValue)"
+      :value="modelValue"
+      @input="emit('update:modelValue', $event.target.value)"
       :placeholder="placeholder"
       :maxlength="maxlength"
       rows="5"

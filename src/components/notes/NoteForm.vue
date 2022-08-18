@@ -18,6 +18,12 @@ const props = defineProps({
 })
 const textarea = ref()
 const emit = defineEmits(['update:modelValue'])
+const focusTextArea = () => {
+  textarea.value.focus()
+}
+defineExpose({
+  focusTextArea
+})
 </script>
 
 <template>

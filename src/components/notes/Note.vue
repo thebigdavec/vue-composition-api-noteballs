@@ -61,4 +61,7 @@ const modals = reactive({
 div:first-of-type {
   grid-column: 1 / -1;
 }
+div:first-of-type > div > p {
+  font-size: var(--size-5);
+}
 </style>

@@ -19,7 +19,7 @@ footer.container {
   justify-content: space-between;
   gap: var(--size-6);
   background-image: var(--gradient-2);
-  padding: var(--size-6) var(--size-fluid-6);
+  padding: var(--size-6) var(--size-fluid-4);
   text-shadow: 0 1px 1px black;
   font-size: var(--size-4);
 }

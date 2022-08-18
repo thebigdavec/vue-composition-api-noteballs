@@ -1,10 +1,13 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import { useWatchCharacters } from '@/use/useWatchCharacters'
+import { ref } from 'vue'
+import { useAuthStore } from '@/stores/authStore'
 import { useNotesStore } from '@/stores/notesStore'
-import Note from '@/components/notes/Note.vue'
 import { storeToRefs } from 'pinia'
-import NoteForm from '../components/notes/NoteForm.vue'
+
+import Note from '@/components/notes/Note.vue'
+import NoteForm from '@/components/notes/NoteForm.vue'
+
+const authStore = useAuthStore()
 
 const notesStore = useNotesStore()
 const { notes } = storeToRefs(notesStore)
@@ -23,10 +26,6 @@ const addNote = async () => {
   newNote.value = ''
   noteForm.value.focusTextArea()
 }
-
-onMounted(() => {
-  noteForm.value.focusTextArea()
-})
 </script>
 <template>
   <h1>Notes</h1>
@@ -43,14 +42,25 @@ onMounted(() => {
       </button>
     </template>
   </NoteForm>
-  <progress v-if="notesStore.isLoading" />
-  <div v-else class="notes container-inner">
+  <div v-if="authStore.user.isLoggedIn && notesStore.isLoading">
+    Is Loading
+    <div>
+      <progress />
+    </div>
+  </div>
+  <div v-else-if="authStore.user.isLoggedIn" class="notes container-inner">
     <div class="card" v-if="!notes.length">
       <h2>There are no notes.</h2>
       <p>Please add a new note in the area above.</p>
     </div>
     <div v-else class="notes-list">
       <Note v-for="note in notes" :key="note.id" :note="note" />
+    </div>
+  </div>
+  <div v-else class="notes container-inner">
+    <div class="card">
+      <h2>You are not logged in.</h2>
+      <p>Please log in to view your notes.</p>
     </div>
   </div>
 </template>

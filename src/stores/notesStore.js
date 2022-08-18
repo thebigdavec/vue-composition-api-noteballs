@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { defineStore } from 'pinia'
 import {
   doc,
@@ -12,9 +13,12 @@ import {
 } from 'firebase/firestore'
 
 import { db } from '@/js/firebase'
+import { useAuthStore } from '@/stores/authStore'
 
-const notesCollection = collection(db, 'notes')
-const q = query(notesCollection, orderBy('createdAt', 'desc'))
+let notesCollection
+let q
+
+let unSubscribe
 
 export const useNotesStore = defineStore('notes', {
   state: () => {
@@ -30,8 +34,22 @@ export const useNotesStore = defineStore('notes', {
       state.notes.reduce((count, note) => count + note.content.length, 0)
   },
   actions: {
+    init() {
+      const authStore = useAuthStore()
+      if (authStore.user.isLoggedIn) {
+        notesCollection = collection(db, 'users', authStore.user.uid, 'notes')
+        q = query(notesCollection, orderBy('createdAt', 'desc'))
+
+        this.fetch()
+      } else {
+        this.state.notes = []
+        this.state.isLoading = false
+        unSubscribe()
+      }
+    },
     fetch() {
-      const unSubscribe = onSnapshot(q, querySnapshot => {
+      if (unSubscribe) unSubscribe()
+      unSubscribe = onSnapshot(q, querySnapshot => {
         this.notes = []
         querySnapshot.forEach(note =>
           this.notes.push({
@@ -41,12 +59,14 @@ export const useNotesStore = defineStore('notes', {
         )
         this.isLoading = false
       })
-      return unSubscribe
     },
-
+    clear() {
+      this.notes = []
+    },
     async add(note) {
       await addDoc(notesCollection, {
-        ...note,
+        title: note.title,
+        content: note.content,
         createdAt: Timestamp.fromDate(new Date())
       })
     },

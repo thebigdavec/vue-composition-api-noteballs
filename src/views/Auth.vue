@@ -1,7 +1,12 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import { vAutofocus } from '../directives/vAutofocus'
+import { vAutofocus } from '@/directives/vAutofocus'
+import { useAuthStore } from '@/stores/authStore'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+
+const { registerUser, login } = useAuthStore()
 const register = ref(false)
 
 const credentials = reactive({
@@ -10,7 +15,7 @@ const credentials = reactive({
   passwordConfirmation: ''
 })
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   if (!credentials.email || !credentials.password) {
     alert('Please fill in all fields')
     return
@@ -26,10 +31,22 @@ const handleSubmit = () => {
     alert('Passwords do not match')
     return
   }
+  if (register.value && credentials.password.length < 6) {
+    alert('Password must be at least 6 characters long')
+    return
+  }
   if (register.value) {
-    console.log('Registering')
+    await registerUser({
+      email: credentials.email,
+      password: credentials.password
+    })
+    router.push({ name: 'notes' })
   } else {
-    console.log('Logging in')
+    await login({
+      email: credentials.email,
+      password: credentials.password
+    })
+    router.push({ name: 'notes' })
   }
 }
 </script>
@@ -129,10 +146,13 @@ li.is-active {
     border-color 100ms ease-in;
 }
 .auth-form {
-  max-width: 400px;
+  max-width: 500px;
 }
 .auth-form input {
   display: block;
   width: 100%;
+}
+small {
+  margin-block-start: var(--size-2);
 }
 </style>

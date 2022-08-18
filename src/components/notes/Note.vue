@@ -1,10 +1,7 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from 'vue'
+import { computed, reactive } from 'vue'
 import { useDateFormat, useTimeAgo } from '@vueuse/core'
-import { useNotesStore } from '@/stores/notesStore'
 import DeleteNoteModal from './DeleteNoteModal.vue'
-
-const notesStore = useNotesStore()
 
 const { note } = defineProps({
   note: {

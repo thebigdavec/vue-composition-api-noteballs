@@ -16,7 +16,7 @@ const props = defineProps({
 })
 
 const { remove } = useNotesStore()
-const dialog = ref(null)
+const dialog = ref()
 const emit = defineEmits(['update:modelValue'])
 
 const closeModal = () => {

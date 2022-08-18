@@ -31,7 +31,7 @@ h6 {
 
 .container {
     background: var(--surface-2);
-    padding: var(--size-6) var(--size-fluid-6);
+    padding: var(--size-6) var(--size-fluid-4);
 }
 
 .container-inner {
@@ -114,7 +114,7 @@ button {
     align-items: center;
 }
 
-:empty {
+:empty:not(:is(progress, input, textarea, div)) {
     display: none;
 }
 

@@ -1,15 +1,14 @@
 <script setup>
-import { ref } from 'vue'
 import Navbar from './Navbar.vue'
-
-const mobileNav = ref(false)
 </script>
+
 <template>
   <header class="container">
     <div class="brand">Noteballs</div>
     <Navbar />
   </header>
 </template>
+
 <style scoped>
 header.container {
   display: flex;
@@ -18,7 +17,7 @@ header.container {
   justify-content: space-between;
   gap: var(--size-6);
   background-image: var(--gradient-2);
-  padding: var(--size-6) var(--size-fluid-6);
+  padding: var(--size-6) var(--size-fluid-4);
   text-shadow: 0 1px 1px black;
   font-size: var(--size-4);
 }

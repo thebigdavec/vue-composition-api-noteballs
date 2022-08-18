@@ -1,14 +1,6 @@
 <script setup>
-import { useNotesStore } from '@/stores/notesStore'
 import Header from '@/components/layout/Header.vue'
 import Footer from '@/components/layout/Footer.vue'
-import { onMounted } from 'vue'
-
-const notesStore = useNotesStore()
-
-onMounted(() => {
-  notesStore.fetch()
-})
 </script>
 
 <template>

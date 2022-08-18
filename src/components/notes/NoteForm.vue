@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import { vAutofocus } from '@/directives/vAutofocus'
 
 const props = defineProps({
@@ -17,24 +16,13 @@ const props = defineProps({
   }
 })
 
-const textarea = ref()
-
 const emit = defineEmits(['update:modelValue'])
-
-const focusTextArea = () => {
-  textarea.value.focus()
-}
-
-defineExpose({
-  focusTextArea
-})
 </script>
 
 <template>
   <form @submit.prevent="" class="form">
     <h2><slot /></h2>
     <textarea
-      ref="textarea"
       v-model="modelValue"
       @input="emit('update:modelValue', modelValue)"
       :placeholder="placeholder"
